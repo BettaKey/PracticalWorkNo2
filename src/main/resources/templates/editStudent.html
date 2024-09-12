@@ -2,23 +2,26 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Редактирование студента</title>
 </head>
 <body>
-<h2>Редактирование студента</h2>
-<form th:action="@{/student/{id}/edit(id=${student.id})}" method="post">
-    <input type="text" name="name" placeholder="Имя" th:value="${student.name}" required>
-    <input type="text" name="email" placeholder="Почта" th:value="${student.email}" required>
-    <input type="text" name="password" placeholder="Пароль" th:value="${student.password}" required>
-
+<h2> Редактирование студента </h2>
+<form th:action="@{/student/{id}/edit(id=${student.id})}"
+      method="post">
+    <input type="text" name="name" placeholder="Имя студента"
+           th:value="${student.name}" required>
+    <input type="text" name="email" placeholder="Email студента"
+           th:value="${student.email}" required>
+    <input type="text" name="password" placeholder="Пароль студента"
+           th:value="${student.password}" required>
     <select name="groupId" required>
         <option th:each="group : ${groups}"
                 th:value="${group.id}"
                 th:text="${group.name}"
-                th:selected="${group.id.equals(student.groupId)}"></option>
+                th:selected="${group.id.equals(student.groupId)}">
+        </option>
     </select>
-
-    <button type="submit">Сохранить изменения</button>
+    <button type="submit"> Сохранить </button>
 </form>
 </body>
 </html>

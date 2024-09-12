@@ -18,33 +18,51 @@ public class StudentModel {
         this.groupId = groupId;
     }
 
-    public UUID getId() { return id; }
+    public UUID getId() {
+        return id;
+    }
 
-    public void setId(UUID id) { this.id = id; }
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
-    public void setPassword(String password) { this.password = password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public UUID getGroupId() { return groupId; }
+    public UUID getGroupId() {
+        return groupId;
+    }
 
-    public void setGroupId(UUID groupId) { this.groupId = groupId; }
+    public void setGroupId(UUID groupId) {
+        this.groupId = groupId;
+    }
 
     public String getGroupName(List<GroupModel> groups) {
         return groups.stream()
                 .filter(group -> group.getId().equals(this.groupId))
                 .map(GroupModel::getName)
                 .findFirst()
-                .orElse("группа не выбрана");
+                .orElse("");
     }
-
-
 }

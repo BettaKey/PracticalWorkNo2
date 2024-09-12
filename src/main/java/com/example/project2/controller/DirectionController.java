@@ -1,18 +1,19 @@
 package com.example.project2.controller;
 
 import com.example.project2.model.DirectionModel;
+import com.example.project2.model.GroupModel;
 import com.example.project2.service.DirectionService;
 import com.example.project2.service.GroupService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/direction")
 public class DirectionController {
-
     private final DirectionService directionService;
     private final GroupService groupService;
 
@@ -23,11 +24,10 @@ public class DirectionController {
 
     @GetMapping
     public String getDirectionAll(Model model) {
-        var directions = directionService.findAllDirections();
+        List<DirectionModel> directions = directionService.findAllDirections();
         model.addAttribute("directions", directions);
         return "directionList";
     }
-
 
     @GetMapping("/create")
     public String getCreateDirection() {
@@ -35,24 +35,24 @@ public class DirectionController {
     }
 
     @PostMapping("/create")
-    public String postCreateDirection(@RequestParam(name="name") String name) {
+    public String postCreateDirection(@RequestParam(name = "name") String name) {
         directionService.createDirection(new DirectionModel(name));
         return "redirect:/direction";
     }
 
     @GetMapping("/{id}/edit")
     public String getEditDirection(@PathVariable UUID id, Model model) {
-        var direction = directionService.findDirectionById(id);
+        DirectionModel direction = directionService.findDirectionById(id);
+        if (direction == null) {
+            return "redirect:/direction";
+        }
         model.addAttribute("direction", direction);
         return "editDirection";
     }
 
     @PostMapping("/{id}/edit")
-    public String postEditDirection(
-            @PathVariable UUID id,
-            @RequestParam(name="name") String name
-    ) {
-        var direction = new DirectionModel(name);
+    public String postEditDirection(@PathVariable UUID id, @RequestParam(name = "name") String name) {
+        DirectionModel direction = new DirectionModel(name);
         direction.setId(id);
         directionService.updateDirection(direction);
         return "redirect:/direction";
@@ -66,8 +66,11 @@ public class DirectionController {
 
     @GetMapping("/{id}/groups")
     public String getGroupsByDirection(@PathVariable UUID id, Model model) {
-        var direction = directionService.findDirectionById(id);
-        var groups = groupService.findGroupsByDirectionId(id);
+        DirectionModel direction = directionService.findDirectionById(id);
+        if (direction == null) {
+            return "redirect:/direction";
+        }
+        List<GroupModel> groups = groupService.findGroupsByDirectionId(id);
         model.addAttribute("directions", direction);
         model.addAttribute("groups", groups);
         return "groupsByDirection";

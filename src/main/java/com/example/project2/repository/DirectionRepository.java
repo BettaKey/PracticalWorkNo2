@@ -17,7 +17,10 @@ public class DirectionRepository {
     }
 
     public DirectionModel findDirectionById(UUID id) {
-        return DIRECTIONS.stream().filter(element -> element.getId().equals(id)).findFirst().orElse(null);
+        return DIRECTIONS.stream()
+                .filter(direction -> direction.getId().equals(id))
+                .findFirst()
+                .orElse(null);
     }
 
     public DirectionModel createDirection(DirectionModel direction) {
@@ -26,19 +29,19 @@ public class DirectionRepository {
     }
 
     public DirectionModel updateDirection(DirectionModel direction) {
-        var directionIndex = IntStream.range(0, DIRECTIONS.size())
+        int directionIndex = IntStream.range(0, DIRECTIONS.size())
                 .filter(index -> DIRECTIONS.get(index).getId().equals(direction.getId()))
                 .findFirst()
                 .orElse(-1);
-        if (directionIndex == -1) {
-            return null;
+        if (directionIndex != -1) {
+            DIRECTIONS.set(directionIndex, direction);
+            return direction;
         }
-        DIRECTIONS.set(directionIndex, direction);
-        return direction;
+        return null;
     }
 
     public void deleteDirection(UUID id) {
-        var direction = findDirectionById(id);
+        DirectionModel direction = findDirectionById(id);
         if (direction != null) {
             DIRECTIONS.remove(direction);
         }

@@ -2,22 +2,20 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Редактирование группы</title>
 </head>
 <body>
-<h2>Edit Group</h2>
+<h2> Редактирование группы </h2>
 <form th:action="@{/group/{id}/edit(id=${group.id})}" method="post">
     <input type="text" name="name" th:value="${group.name}" required>
-
     <select name="directionId" required>
-        <option value="Выберите направление" disabled></option>
-        <th:block th:each="direction : ${directions}">
-            <option th:value="${direction.id}" th:text="${direction.name}"
-                    th:selected="${group.directionId == direction.id}"></option>
-        </th:block>
+        <option value="" disabled selected> </option>
+        <option th:each="direction : ${directions}"
+                th:value="${direction.id}" th:text="${direction.name}"
+                th:selected="${group.directionId == direction.id}">
+        </option>
     </select>
-
-    <button type="submit">Сохранить изменения</button>
+    <button type="submit"> Сохранить </button>
 </form>
 </body>
 </html>

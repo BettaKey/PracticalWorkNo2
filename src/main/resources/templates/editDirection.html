@@ -2,12 +2,15 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Редактирование направления</title>
 </head>
 <body>
-<form action="#" th:action="@{/direction/{id}/edit(id=${direction.id})}" method="post">
+<h2> Редактирование направления </h2>
+<form action="#"
+      th:action="@{/direction/{id}/edit(id=${direction.id})}"
+      method="post">
   <input type="text" name="name" th:value="${direction.name}" required>
-  <button type="submit">Редактировать</button>
+  <button type="submit"> Сохранить </button>
 </form>
 </body>
 </html>

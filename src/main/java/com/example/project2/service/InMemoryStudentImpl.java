@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class InMemoryStudentImpl implements StudentService {
-
     private final StudentRepository studentRepository;
 
     public InMemoryStudentImpl(StudentRepository studentRepository) {
@@ -45,7 +44,7 @@ public class InMemoryStudentImpl implements StudentService {
     @Override
     public List<StudentModel> findStudentsByGroupId(UUID groupId) {
         return studentRepository.findAllStudent().stream()
-                .filter(student -> groupId.equals(student.getGroupId()))
+                .filter(student -> student.getGroupId().equals(groupId))
                 .collect(Collectors.toList());
     }
 }
