@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/direction/{id}/edit(id=${direction.id})}" method="post">
+  <input type="text" name="name" th:value="${direction.name}" required>
+  <button type="submit">Редактировать</button>
+</form>
+</body>
+</html>

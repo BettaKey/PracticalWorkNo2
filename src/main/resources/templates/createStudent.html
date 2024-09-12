@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Создать студента</h2>
+<form action="/student/create" method="post">
+    <input type="text" name="name" placeholder="Имя" required>
+    <input type="text" name="email" placeholder="Почта" required>
+    <input type="text" name="password" placeholder="Пароль" required>
+
+    <select name="groupId" required>
+        <option value="" disabled selected>Выберите группу</option>
+        <option th:each="group : ${groups}" th:value="${group.id}" th:text="${group.name}"></option>
+    </select>
+
+    <button type="submit">Создать студента</button>
+</form>
+</body>
+</html>

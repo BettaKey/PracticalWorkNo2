@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Список студентов группы</h2>
+<form action="/group" method="get">
+    <button>Вернуться к группам</button>
+</form>
+<ul>
+    <th:block th:each="student : ${student}">
+        <li th:text="${student.name} + ' ' + ${student.email}"></li>
+    </th:block>
+</ul>
+</body>
+</html>
+
+

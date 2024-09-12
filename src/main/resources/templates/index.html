@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Список студентов</h2>
+<form action="/group" method="get" style="display: inline;">
+    <button>Перейти к группам</button>
+</form>
+<form action="/student/create" method="get" style="display: inline;">
+    <button>Добавить студента</button>
+</form>
+<ul>
+    <th:block th:each="student : ${students}">
+        <li>
+            <span th:text="${student.name} + ' - ' + ${student.email} + ' / ' + (${student.groupId != null} ? ${groupService.findGroupById(student.groupId).name} : 'Группа не выбрана')"></span>
+
+            <form th:action="@{/student/{id}/edit(id=${student.id})}" method="get" style="display: inline;">
+                <button type="submit">Редактировать</button>
+            </form>
+
+            <form th:action="@{/student/{id}/delete(id=${student.id})}" method="post" style="display: inline;">
+                <button type="submit">Удалить</button>
+            </form>
+        </li>
+    </th:block>
+</ul>
+</body>
+</html>

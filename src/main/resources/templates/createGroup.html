@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Group</title>
+</head>
+<body>
+<h2>Создать группу</h2>
+<form action="/group/create" method="post">
+    <input type="text" name="name" placeholder="Название группы" required>
+
+    <select name="directionId" required>
+        <option value="" disabled selected>Выберите направление</option>
+        <option th:each="direction : ${directions}" th:value="${direction.id}" th:text="${direction.name}"></option>
+    </select>
+
+
+    <button type="submit">Добавить группу</button>
+</form>
+</body>
+</html>

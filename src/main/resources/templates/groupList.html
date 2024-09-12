@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h2>Список групп</h2>
+<form action="/student" method="get" style="display: inline;">
+  <button>Перейти к студентам</button>
+</form>
+<form action="/direction" method="get" style="display: inline;">
+  <button>Перейти к направлениям</button>
+</form>
+<form action="/group/create" method="get" style="display: inline;">
+  <button>Добавить группу</button>
+</form>
+<ul>
+  <th:block th:each="group : ${groups}">
+    <li>
+      <span th:text="${group.name} + ' / '+ ${#lists.isEmpty(directions) ? 'направление не выбрано' : group.getDirectionName(directions)}"></span>
+
+      <form th:action="@{/group/{id}/students(id=${group.id})}" method="get" style="display: inline;">
+        <button type="submit">Посмотреть студентов</button>
+      </form>
+
+      <form th:action="@{/group/{id}/edit(id=${group.id})}" method="get" style="display: inline;">
+        <button type="submit">Редактировать</button>
+      </form>
+
+      <form th:action="@{/group/{id}/delete(id=${group.id})}" method="post" style="display: inline;">
+        <button type="submit">Удалить</button>
+      </form>
+    </li>
+  </th:block>
+</ul>
+</body>
+</html>
